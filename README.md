@@ -2,7 +2,9 @@
 ## Introduction
 
 **MSA-SAM** is an open-source  semantic segmentation toolbox based on PyTorch, [pytorch lightning](https://www.pytorchlightning.ai/) and [timm](https://github.com/rwightman/pytorch-image-models), 
-which mainly focuses on developing advanced Vision Transformers for remote sensing image segmentation.
+which mainly focuses on developing advanced Vision Transformers for remote sensing image segmentation. 
+
+Our proposed method is based on Segment Anything model and adapt it to remote sensing image segmentation.
 
 ## Major Features
 
@@ -104,9 +106,30 @@ python MSA-SAM/vaihingen_test.py --rgb -t 'd4'
 |    MSA-SAM    |  Potsdam  | 93.6  | 92.5  | 88.2  |
 |    MSA-SAM    |  LoveDA   |   -   |   -   | 54.8  |
 
+## Comparison with other methods
+
+**Vaihingen Dataset**
 <div>
-<img src="figs/vaihingen_visualization.png" width="30%"/>
-<img src="figs/potsdam_visualization.png" width="35.5%"/>
-<img src="figs/uavid_visualization.png" width="35.5%"/>
-<img src="figs/loveda_visualization.png" width="35.5%"/>
+<img src="figs/vai.png" width="100%"/>
+</div>
+**Potsdam Dataset**
+</div>
+<img src="figs/pot.png" width="100%"/>
+</div>
+**UAVid Dataset**
+</div>
+<img src="figs/uavid.png" width="100%"/>
+</div>
+**Loveda Dataset**
+</div>
+<img src="figs/loveda.png" width="100%"/>
+</div>
+
+
+## Visualization Results
+<div>
+<img src="figs/vaihingen_visualization.png" width="100%"/>
+<img src="figs/potsdam_visualization.png" width="100%"/>
+<img src="figs/uavid_visualization.png" width="100%"/>
+<img src="figs/loveda_visualization.png" width="100%"/>
 </div>
