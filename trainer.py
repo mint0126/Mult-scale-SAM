@@ -62,6 +62,22 @@ def val(model, dataloader, metrics_val):
 def trainer_synapse(args, model, snapshot_path, trainloader, valloader):
 
     model.train()
+    # RS3MAmba
+    '''base_lr = 0.01
+    params_dict = dict(net.named_parameters())
+    params = []
+    for key, value in params_dict.items():
+        if '_D' in key:
+            # Decoder weights are trained at the nominal learning rate
+            params += [{'params':[value],'lr': base_lr}]
+        else:
+            # Encoder weights are trained at lr / 2 (we have VGG-16 weights as initialization)
+            params += [{'params':[value],'lr': base_lr / 2}]
+
+    optimizer = optim.SGD(net.parameters(), lr=base_lr, momentum=0.9, weight_decay=0.0005)
+    # We define the scheduler
+    scheduler = optim.lr_scheduler.MultiStepLR(optimizer, [25, 35, 45], gamma=0.1)'''
+
     base_lr = args.base_lr
     
     if args.warmup:
@@ -92,7 +108,9 @@ def trainer_synapse(args, model, snapshot_path, trainloader, valloader):
     iterator = tqdm(range(max_epoch), ncols=70)
     model.train()
     for epoch_num in iterator:
-        # trainloader.sampler.set_epoch(epoch_num)
+        # rs3mamba
+        '''if scheduler is not None:
+            scheduler.step()'''
         epoch_samples = 0
         for _, sampled_batch in enumerate(trainloader):
 

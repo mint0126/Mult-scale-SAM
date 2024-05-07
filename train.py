@@ -15,9 +15,9 @@ import sys
 from segment_anything import sam_model_registry
 from trainer_LST import trainer_synapse
 from icecream import ic
-# from remote_dataset.vaihingen_dataset_ori import * 
+from remote_dataset.vaihingen_dataset_ori import * 
 # from remote_dataset.potsdam_dataset_ori import * 
-from remote_dataset.loveda_dataset import *
+# from remote_dataset.loveda_dataset import *
 # from remote_dataset.uavid_dataset import *
 # from remote_dataset.vaihingen_multi_scale import * 
 from torch.utils.data import DataLoader
@@ -32,16 +32,16 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--output', type=str, default='/data/shanjuan/home/results/SAM-LST-main/results')
 parser.add_argument('--dataset', type=str,
-                    default='loveda', help='dataset_name')
+                    default='vaihingen', help='dataset_name')
 parser.add_argument('--experiment', type=str,
-        default='SAM_LST_nh8dim12val1', help='experiment_name')
+        default='SAM_LST', help='experiment_name')
 
 parser.add_argument('--num_classes', type=int,
                     default=len(CLASSES), help='output channel of network')
 parser.add_argument('--max_iterations', type=int,
                     default=30000, help='maximum epoch number to train')
 parser.add_argument('--max_epochs', type=int,
-                    default=100, help='maximum epoch number to train')
+                    default=200, help='maximum epoch number to train')
 parser.add_argument('--batch_size', type=int,
                     default=4, help='batch_size per gpu')
 parser.add_argument('--n_gpu', type=int, default=4, help='total gpu')
@@ -131,21 +131,21 @@ if __name__ == "__main__":
 
     logging.info(str(args))
     batch_size = args.batch_size * args.n_gpu
-    '''
+    
     train_dataset = VaihingenDataset(data_root='/data/shanjuan/home/remote_data/remote_data/vaihingen/train', mode='train',
                                  mosaic_ratio=0.25, transform=train_aug)
 
     val_dataset = VaihingenDataset(data_root='/data/shanjuan/home/remote_data/remote_data/vaihingen/test', img_dir='images_1024', mask_dir='masks_1024', transform=val_aug)
-
+    '''
     train_dataset = PotsdamDataset(data_root='/data/shanjuan/home/remote_data/remote_data/potsdam/train', mode='train',
                                  mosaic_ratio=0.25, transform=train_aug)
 
     val_dataset = PotsdamDataset(data_root='/data/shanjuan/home/remote_data/remote_data/potsdam/test', transform=val_aug)
-    '''
+
     train_dataset = LoveDATrainDataset()
 
     val_dataset = loveda_val_dataset
-    '''
+
     train_dataset = UAVIDDataset(data_root='/data/shanjuan/home/remote_data/remote_data/uavid/uavid_train', img_dir='images', mask_dir='masks',
                              mode='train', mosaic_ratio=0.25, transform=train_aug, img_size=(1024, 1024))
 

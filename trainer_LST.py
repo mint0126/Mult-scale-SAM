@@ -22,9 +22,9 @@ from catalyst.contrib.nn import Lookahead
 from catalyst import utils
 
 
-CLASSES = ('ImSurf', 'Building', 'LowVeg', 'Tree', 'Car', 'Clutter')
-# CLASSES = ('Building', 'Road', 'Tree', 'LowVeg', 'Moving_Car',  'Static_Car', 'Human', 'Clutter')
-# CLASSES = ('background', 'building', 'road', 'water', 'barren', 'forest', 'agricultural')
+CLASSES = ('ImSurf', 'Building', 'LowVeg', 'Tree', 'Car', 'Clutter') # vaihingen and potsdam
+# CLASSES = ('Building', 'Road', 'Tree', 'LowVeg', 'Moving_Car',  'Static_Car', 'Human', 'Clutter') # uavid
+# CLASSES = ('background', 'building', 'road', 'water', 'barren', 'forest', 'agricultural') # loveda
 
 
 def val(model, dataloader, metrics_val, multimask_output, img_size):
@@ -85,7 +85,7 @@ def trainer_synapse(args, model, snapshot_path, trainloader, valloader, multimas
     max_iterations = args.max_epochs * len(trainloader)  # max_epoch = max_iterations // len(trainloader) + 1
     logging.info("{} iterations per epoch. {} max iterations ".format(len(trainloader), max_iterations))
     best_miou = 0.0
-    calc_loss = UnetFormerLoss(ignore_index=args.num_classes)
+    calc_loss = UnetFormerLoss(ignore_index=args.num_classes) # if data is uavid, ignore_index=255
     metrics_train = Evaluator(num_class=args.num_classes)
     metrics_val = Evaluator(num_class=args.num_classes)
     iterator = tqdm(range(max_epoch), ncols=70)

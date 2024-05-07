@@ -12,7 +12,7 @@ class SAM_LST(nn.Module):
         super(SAM_LST, self).__init__()
 
         self.sam, _ = sam_model_registry["vit_b"](image_size=512,
-                                                  num_classes=7,
+                                                  num_classes=6,
                                                   checkpoint="/data/shanjuan/home/pretrained_models/pretrained_models/sam_vit_b_01ec64.pth",
                                                   pixel_mean=[0.3394, 0.3598, 0.3226],
                                                   pixel_std=[0.2037, 0.1899, 0.1922])

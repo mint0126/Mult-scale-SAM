@@ -116,7 +116,7 @@ class ImageEncoderViT(nn.Module):
             LayerNorm2d(out_chans),
         )
 
-        self.out_indices = [2, 5, 8]
+        self.out_indices = [1, 4, 7]
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.patch_embed(x)
@@ -132,15 +132,11 @@ class ImageEncoderViT(nn.Module):
             x = x + pos_embed
 
         outs = []
-        # pyramids = []
-        j = 0
 
         for i, blk in enumerate(self.blocks):
             x = blk(x, i)
             if i in self.out_indices:
                 outs.append(x.permute(0, 3, 1, 2))
-
-                j = j+1
             
         x = self.neck(x.permute(0, 3, 1, 2))
         return x, outs
@@ -343,68 +339,7 @@ class Block(nn.Module):
                 x = shortcut + x
                 x = x + self.mlp(self.norm2(x))
                 return x
-        '''
-        if window_size == 0:
-            self.down_proj = nn.Linear(dim, dim//12)
-            self.d_convs = nn.ModuleList([nn.Conv2d(dim//12, dim//12, kernel_size=3, stride=1, padding=1, groups=dim//12) for temp in pool_ratios])
-            self.p2t_attn = PoolingAttention(dim//12, num_heads=8, qkv_bias=qkv_bias, pool_ratios=pool_ratios)
-            self.p2t_mlp = IRB(in_features=dim, hidden_features=int(dim * mlp_ratio), act_layer=nn.Hardswish, drop=0.3, ksize=3)
-            self.up_proj = nn.Linear(dim//12, dim)
-        else:
-            self.down_proj = nn.Linear(dim, dim // 12)
-            self.attn_0 = Attention(dim // 12, num_heads=8, qkv_bias=qkv_bias, use_rel_pos=True, rel_pos_zero_init=rel_pos_zero_init,
-                                input_size=(7, 7))
-            self.attn_1 = Attention(dim // 12, num_heads=8, qkv_bias=qkv_bias, use_rel_pos=True, rel_pos_zero_init=rel_pos_zero_init,
-                                input_size=(28, 28))
-            # self.p2t_mlp = IRB(in_features=dim // 12, hidden_features=int(dim // 12 * mlp_ratio), act_layer=nn.Hardswish, drop=0.3, ksize=3)
-            self.up_proj = nn.Linear(dim // 12, dim)
-            self.p2t_mlp = MLPBlock(embedding_dim=dim, mlp_dim=int(dim * mlp_ratio), act=act_layer)
-
-        self.drop_path = DropPath(drop_path) if drop_path > 0. else nn.Identity()
-        self.window_size = window_size
-        self.multi_scale_layers = [3, 9, 10]
-        # self.multi_scale_layers = [1, 4, 7, 10]
-
-    def forward(self, x: torch.Tensor, i: int) -> torch.Tensor:
-        shortcut = x
         
-        x = self.norm1(x) #(B, H, W, C)
-    
-        if self.window_size > 0:
-            H, W = x.shape[1], x.shape[2]
-            x, pad_hw = window_partition(x, self.window_size)     
-
-        x = self.attn(x)
-
-        if self.window_size > 0:
-            x = window_unpartition(x, self.window_size, pad_hw, (H, W))
-
-        if self.window_size == 0:
-            x = shortcut + x
-            _x = self.down_proj(x)
-            s_x = x + self.drop_path(self.up_proj(self.p2t_attn(self.norm3(_x), self.d_convs))) # + shortcut
-            x = s_x + self.mlp(self.norm2(x)) + self.drop_path(self.p2t_mlp(self.norm4(s_x))) # + x_.permute(0, 2, 3, 1)
-            return x
-        
-        else:
-            if i in self.multi_scale_layers:
-                x = shortcut + x
-                H, W = x.shape[1], x.shape[2]
-                _x = self.down_proj(x)
-                n_x = self.norm5(_x)
-                w_x, w_pad_hw = window_partition(n_x, 7)
-                up_w_x, up_w_pad_hw = window_partition(n_x, 28)
-                w_x = self.drop_path(self.attn_0(w_x))
-                up_w_x = self.drop_path(self.attn_1(up_w_x))
-                w_x = window_unpartition(w_x, 7, w_pad_hw, (H, W)) + window_unpartition(up_w_x, 28, up_w_pad_hw, (H, W)) + _x
-                w_x = self.up_proj(w_x) + x
-                x = w_x + self.mlp(self.norm2(x)) + self.drop_path(self.p2t_mlp(self.norm6(w_x)))
-                return x
-            else:
-                x = shortcut + x
-                x = x + self.mlp(self.norm2(x))
-                return x
-        '''
 class Attention(nn.Module):
     """Multi-head Attention block with relative position embeddings."""
 

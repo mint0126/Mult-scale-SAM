@@ -138,13 +138,9 @@ class MaskDecoder(nn.Module):
         mask_tokens_out = hs[:, 1 : (1 + self.num_mask_tokens), :]
 
         src = src.transpose(1, 2).view(b, c, h, w)
-        
-        # gate = self.Sigmoid(self.alpha)
-        # src = (1-gate) * structural_embeddings + gate * src
-        # src = torch.cat([src, structural_embeddings], dim=1)
-        # src = self.scale_features(src)
+    
         upscaled_embedding = self.output_upscaling(src)
-        # upscaled_embedding = self.scale_features(upscaled_embedding, structural_embeddings, h, w, 4 * h, 4 *w)
+
         hyper_in_list: List[torch.Tensor] = []
         for i in range(self.num_mask_tokens):
             hyper_in_list.append(self.output_hypernetworks_mlps[i](mask_tokens_out[:, i, :]))
