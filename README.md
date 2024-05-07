@@ -100,7 +100,7 @@ python MSA-SAM/train.py --AdamW
 ## Testing
 
 ```
-python MSA-SAM/vaihingen_test.py --rgb -t 'd4'
+python MSA-SAM/test.py --rgb -t 'd4'
 ```
 
 ## Reproduction Results
