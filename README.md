@@ -105,8 +105,8 @@ python MSA-SAM/vaihingen_test.py --rgb -t 'd4'
 |    MSA-SAM    |  LoveDA   |   -   |   -   | 54.8  |
 
 <div>
-<img src="vaihingen_visualization.png" width="30%"/>
-<img src="potsdam_visualization.png" width="35.5%"/>
-<img src="uavid_visualization.png" width="35.5%"/>
-<img src="loveda_visualization.png" width="35.5%"/>
+<img src="figs/vaihingen_visualization.png" width="30%"/>
+<img src="figs/potsdam_visualization.png" width="35.5%"/>
+<img src="figs/uavid_visualization.png" width="35.5%"/>
+<img src="figs/loveda_visualization.png" width="35.5%"/>
 </div>
