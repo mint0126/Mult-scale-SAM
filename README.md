@@ -127,9 +127,20 @@ python MSA-SAM/vaihingen_test.py --rgb -t 'd4'
 
 
 ## Visualization Results
+
+**Vaihingen Dataset**
 <div>
 <img src="figs/vaihingen_visualization.png" width="100%"/>
+</div>
+**Potsdam Dataset**
+</div>
 <img src="figs/potsdam_visualization.png" width="100%"/>
+</div>
+**UAVid Dataset**
+</div>
 <img src="figs/uavid_visualization.png" width="100%"/>
+</div>
+**Loveda Dataset**
+</div>
 <img src="figs/loveda_visualization.png" width="100%"/>
 </div>
