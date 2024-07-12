@@ -20,7 +20,8 @@ Our proposed method is based on Segment Anything model and adapt it to remote se
  
   - [ISPRS Vaihingen and Potsdam](https://www.isprs.org/education/benchmarks/UrbanSemLab/default.aspx) 
   - [UAVid](https://uavid.nl/)
-  - [LoveDA](https://codalab.lisn.upsaclay.fr/competitions/421)
+  - [WHDLD]
+  - [DLRSD]
   - More datasets will be supported in the future.
   
 - Multi-scale Training and Testing
