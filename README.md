@@ -90,10 +90,11 @@ python MSA-SAM/test.py --rgb -t 'd4'
 ## Reproduction Results
 |    Method     |  Dataset  |  F1   |  OA   |  mIoU |
 |:-------------:|:---------:|:-----:|:-----:|------:|
-|    MSA-SAM    |   UAVid   |   -   | 89.7  | 76.3  |
-|    MSA-SAM    | Vaihingen | 92.3  | 94.1  | 86.0  |
-|    MSA-SAM    |  Potsdam  | 93.6  | 92.5  | 88.2  |
-|    MSA-SAM    |  LoveDA   |   -   |   -   | 54.8  |
+|    MSA-SAM    |   UAVid   | 85.8  | 89.7  | 75.9  |
+|    MSA-SAM    | Vaihingen | 92.0  | 93.9  | 85.5  |
+|    MSA-SAM    |  Potsdam  | 93.3  | 92.1  | 87.7  |
+|    MSA-SAM    |  DLRSD    |   -   |   -   | 79.4  |
+|    MSA-SAM    |  WHDLD    |   -   |   -   | 65.3  |
 
 ## Comparison with other methods
 
@@ -129,7 +130,4 @@ python MSA-SAM/test.py --rgb -t 'd4'
 </div>
 <img src="figs/uavid_visualization.png" width="100%"/>
 </div>
-**Loveda Dataset**
-</div>
-<img src="figs/loveda_visualization.png" width="100%"/>
-</div>
+
