@@ -110,24 +110,14 @@ python MSA-SAM/test.py --rgb -t 'd4'
 </div>
 <img src="figs/uavid.png" width="100%"/>
 </div>
-**Loveda Dataset**
+**WHDLD Dataset**
 </div>
-<img src="figs/loveda.png" width="100%"/>
+<img src="figs/whdld.png" width="100%"/>
+</div>
+**DLRSD Dataset**
+</div>
+<img src="figs/dlrsd.png" width="100%"/>
 </div>
 
 
-## Visualization Results
-
-**Vaihingen Dataset**
-<div>
-<img src="figs/vaihingen_visualization.png" width="100%"/>
-</div>
-**Potsdam Dataset**
-</div>
-<img src="figs/potsdam_visualization.png" width="100%"/>
-</div>
-**UAVid Dataset**
-</div>
-<img src="figs/uavid_visualization.png" width="100%"/>
-</div>
 
