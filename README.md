@@ -46,21 +46,6 @@ airs
 ├── model_weights (save the model weights trained on ISPRS vaihingen, LoveDA, etc)
 ├── fig_results (save the masks predicted by models)
 ├── data
-│   ├── LoveDA
-│   │   ├── Train
-│   │   │   ├── Urban
-│   │   │   │   ├── images_png (original images)
-│   │   │   │   ├── masks_png (original masks)
-│   │   │   │   ├── masks_png_convert (converted masks used for training)
-│   │   │   │   ├── masks_png_convert_rgb (original rgb format masks)
-│   │   │   ├── Rural
-│   │   │   │   ├── images_png 
-│   │   │   │   ├── masks_png 
-│   │   │   │   ├── masks_png_convert
-│   │   │   │   ├── masks_png_convert_rgb
-│   │   ├── Val (the same with Train)
-│   │   ├── Test
-│   │   ├── train_val (Merge Train and Val)
 │   ├── uavid
 │   │   ├── uavid_train (original)
 │   │   ├── uavid_val (original)
