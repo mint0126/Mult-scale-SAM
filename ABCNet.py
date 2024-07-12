@@ -307,7 +307,6 @@ class ABCNet(nn.Module):
             feat_out16 = self.conv_out16(feat_cp16)
             feat_out32 = self.conv_out32(feat_cp32)
             return feat_out, feat_out16, feat_out32
-        # feat_out = feat_out.argmax(dim=1)
         return feat_out
 
     def init_weight(self):
@@ -336,7 +335,5 @@ if __name__ == "__main__":
     in_ten = torch.randn(4, 3, 512, 512).cuda()
     out = net(in_ten)
     print(out.shape)
-    # print(out16.shape)
-    # print(out32.shape)
 
     net.get_params()
