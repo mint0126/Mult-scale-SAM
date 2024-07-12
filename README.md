@@ -27,10 +27,7 @@ Our proposed method is based on Segment Anything model and adapt it to remote se
 - Multi-scale Training and Testing
 - Inference on Huge Remote Sensing Images
 
-## Supported Networks
-
-- Vision Transformer
-
+## Supported Network
   - [UNetFormer](https://authors.elsevier.com/a/1fIji3I9x1j9Fs) 
   - [DC-Swin](https://ieeexplore.ieee.org/abstract/document/9681903)
   - [CMTFNet](https://ieeexplore.ieee.org/document/10247595)
