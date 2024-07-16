@@ -1,7 +1,7 @@
 # Mult-scale-SAM
 ## Introduction
 
-**MSA-SAM** is an open-source  semantic segmentation toolbox based on PyTorch, [pytorch](https://pytorch.org/)) and [timm](https://github.com/rwightman/pytorch-image-models), 
+**MSA-SAM** is an open-source  semantic segmentation toolbox based on PyTorch, [pytorch](https://pytorch.org/) and [timm](https://github.com/rwightman/pytorch-image-models), 
 which mainly focuses on developing advanced Vision Transformers for remote sensing image segmentation. 
 
 Our proposed method is based on Segment Anything model and adapt it to remote sensing image segmentation.
