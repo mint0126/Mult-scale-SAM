@@ -119,5 +119,6 @@ python MSA-SAM/test.py --rgb -t 'd4'
 <img src="figs/dlrsd.png" width="100%"/>
 </div>
 
-
+## Acknowledgement
+Our work is built on the codebase of [SAM-LST](https://github.com/11yxk/SAM-LST) and [P2T](https://github.com/yuhuan-wu/P2T). We sincerely thank for their exceptional work.
 
