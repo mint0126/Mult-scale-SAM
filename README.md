@@ -25,7 +25,6 @@ Our proposed method is based on Segment Anything model and adapt it to remote se
   - More datasets will be supported in the future.
   
 - Multi-scale Training and Testing
-- Inference on Huge Remote Sensing Images
 
 ## Supported Network
   - [UNetFormer](https://authors.elsevier.com/a/1fIji3I9x1j9Fs) 
