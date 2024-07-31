@@ -83,7 +83,7 @@ python MSA-SAM/train.py --AdamW
 ## Testing
 
 ```
-python MSA-SAM/test.py --rgb -t 'd4'
+python MSA-SAM/test.py --rgb 
 ```
 
 ## Reproduction Results
@@ -101,18 +101,22 @@ python MSA-SAM/test.py --rgb -t 'd4'
 <div>
 <img src="figs/vai.png" width="100%"/>
 </div>
+
 **Potsdam Dataset**
 </div>
 <img src="figs/pot.png" width="100%"/>
 </div>
+
 **UAVid Dataset**
 </div>
 <img src="figs/uavid.png" width="100%"/>
 </div>
+
 **WHDLD Dataset**
 </div>
 <img src="figs/whdld.png" width="100%"/>
 </div>
+
 **DLRSD Dataset**
 </div>
 <img src="figs/dlrsd.png" width="100%"/>
