@@ -176,7 +176,7 @@ if __name__ == "__main__":
         net = torch.nn.DataParallel(net)
 
     trainer = {args.dataset: trainer_synapse}
-    # trainer[dataset_name](args, net, snapshot_path, trainloader, valloader) # UNetFormer, CMTFNet, FT-UNetFormer
+    # trainer[dataset_name](args, net, snapshot_path, trainloader, valloader) # UNetFormer, CMTFNet, FT-UNetFormer, RS3Mamba, DC-Swin
     trainer[dataset_name](args, net, snapshot_path, trainloader, valloader, multimask_output)
 
 # python train.py --warmup --AdamW
