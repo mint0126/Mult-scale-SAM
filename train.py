@@ -25,6 +25,7 @@ from FTUNetFormer import ft_unetformer
 from UNetFormer import UNetFormer
 from DCSwin import dcswin_base
 from CMTFNet import CMTFNet
+from R3SMamba import RS3Mamba, load_pretrained_ckpt
 
 
 parser = argparse.ArgumentParser()
@@ -104,11 +105,17 @@ if __name__ == "__main__":
 
     pkg = import_module(args.module)
     net = pkg.SAM_LST().cuda()
+  
     # net = UNetFormer(num_classes=args.num_classes).cuda()
+  
     # net = ft_unetformer(num_classes=args.num_classes, decoder_channels=256).cuda()
     
     # net = dcswin_base(num_classes=args.num_classes).cuda()
+  
     # net = CMTFNet(num_classes=args.num_classes).cuda()
+  
+    # net = RS3Mamba(num_classes=args.num_classes).cuda()
+    # net = load_pretrained_ckpt(net) # RS3Mamba
 
     if args.num_classes > 1:
         multimask_output = True
