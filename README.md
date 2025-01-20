@@ -32,7 +32,6 @@ Our proposed method is based on Segment Anything model and adapt it to remote se
   - [CMTFNet](https://ieeexplore.ieee.org/document/10247595)
   - [RS3Mamba](https://arxiv.org/abs/2404.02457)
   - [RSAM-Seg](https://arxiv.org/abs/2402.19004)
-  - [ABCNet](https://arxiv.org/abs/2102.02531)
   
   
 ## Folder Structure
