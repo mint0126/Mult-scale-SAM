@@ -179,5 +179,4 @@ if __name__ == "__main__":
     # trainer[dataset_name](args, net, snapshot_path, trainloader, valloader) # UNetFormer, CMTFNet, FT-UNetFormer, RS3Mamba, DC-Swin
     trainer[dataset_name](args, net, snapshot_path, trainloader, valloader, multimask_output)
 
-# python train.py --warmup --AdamW
 # python train.py --AdamW
