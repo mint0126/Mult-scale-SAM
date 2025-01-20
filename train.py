@@ -14,6 +14,7 @@ import random
 import sys
 from segment_anything import sam_model_registry
 from trainer_LST import trainer_synapse
+# from trainer import trainer_synapse # 当使用UNetFormer，ft_unetformer，dcswin_base，CMTFNet时使用trainer
 from icecream import ic
 from remote_dataset.vaihingen_dataset_ori import * 
 # from remote_dataset.potsdam_dataset_ori import * 
@@ -23,7 +24,6 @@ from torch.utils.data import DataLoader
 from FTUNetFormer import ft_unetformer
 from UNetFormer import UNetFormer
 from DCSwin import dcswin_base
-from UNetFormer import UNetFormer
 from CMTFNet import CMTFNet
 
 
