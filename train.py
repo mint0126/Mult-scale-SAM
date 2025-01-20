@@ -19,7 +19,6 @@ from remote_dataset.vaihingen_dataset_ori import *
 # from remote_dataset.potsdam_dataset_ori import * 
 # from remote_dataset.loveda_dataset import *
 # from remote_dataset.uavid_dataset import *
-# from remote_dataset.vaihingen_multi_scale import * 
 from torch.utils.data import DataLoader
 from FTUNetFormer import ft_unetformer
 from UNetFormer import UNetFormer
