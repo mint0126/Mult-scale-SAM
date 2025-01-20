@@ -9,7 +9,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 from typing import Optional, Tuple, Type
-from .p2t import PoolingAttentionBlock
 from timm.models.layers import DropPath
 from .common import LayerNorm2d, MLPBlock
 import math
