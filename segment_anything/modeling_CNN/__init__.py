@@ -7,6 +7,7 @@
 from .ppm_sam import Sam
 # from .image_encoder import ImageEncoderViT # original SAM
 # from .image_encoder_ppm import ImageEncoderViT # RSAM-Seg
+# from .image_encoder_ppt import ImageEncoderViT # SAM-Adapter
 from .image_encoder_prompt import ImageEncoderViT #Ours
 from .mask_decoder import MaskDecoder
 from .prompt_encoder import PromptEncoder
