@@ -8,7 +8,6 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 from icecream import ic
-from .ASPP import ASPP
 from typing import Any, Dict, List, Tuple
 import torchvision
 from .image_encoder import ImageEncoderViT
@@ -19,85 +18,6 @@ from .transformer import MultiHeadedSelfAttention
 from .ppm_attention import PyramidPoolingBlock
 from .p2t import PoolingAttentionBlock
 
-
-class ConvBNReLU(nn.Sequential):
-    def __init__(self, in_channels, out_channels, kernel_size=3, dilation=1, stride=1, norm_layer=nn.BatchNorm2d, bias=False):
-        super(ConvBNReLU, self).__init__(
-            nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, bias=bias,
-                      dilation=dilation, stride=stride, padding=((stride - 1) + dilation * (kernel_size - 1)) // 2),
-            norm_layer(out_channels),
-            nn.ReLU6()
-        )
-
-
-class ConvBN(nn.Sequential):
-    def __init__(self, in_channels, out_channels, kernel_size=3, dilation=1, stride=1, norm_layer=nn.BatchNorm2d, bias=False):
-        super(ConvBN, self).__init__(
-            nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, bias=bias,
-                      dilation=dilation, stride=stride, padding=((stride - 1) + dilation * (kernel_size - 1)) // 2),
-            norm_layer(out_channels)
-        )
-
-
-class SeparableConvBN(nn.Sequential):
-    def __init__(self, in_channels, out_channels, kernel_size=3, stride=1, dilation=1,
-                 norm_layer=nn.BatchNorm2d):
-        super(SeparableConvBN, self).__init__(
-            nn.Conv2d(in_channels, in_channels, kernel_size, stride=stride, dilation=dilation,
-                      padding=((stride - 1) + dilation * (kernel_size - 1)) // 2,
-                      groups=in_channels, bias=False),
-            norm_layer(in_channels),
-            nn.Conv2d(in_channels, out_channels, kernel_size=1, bias=False)
-        )
-
-
-class SeparableConv(nn.Sequential):
-    def __init__(self, in_channels, out_channels, kernel_size=3, stride=1, dilation=1):
-        super(SeparableConv, self).__init__(
-            nn.Conv2d(in_channels, in_channels, kernel_size, stride=stride, dilation=dilation,
-                      padding=((stride - 1) + dilation * (kernel_size - 1)) // 2,
-                      groups=in_channels, bias=False),
-            nn.Conv2d(in_channels, out_channels, kernel_size=1, bias=False)
-        )
-
-
-class Conv(nn.Sequential):
-    def __init__(self, in_channels, out_channels, kernel_size=3, dilation=1, stride=1, bias=False):
-        super(Conv, self).__init__(
-            nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, bias=bias,
-                      dilation=dilation, stride=stride, padding=((stride - 1) + dilation * (kernel_size - 1)) // 2)
-        )
-
-
-class LayerNorm2d(nn.Module):
-    def __init__(self, num_channels: int, eps: float = 1e-6) -> None:
-        super().__init__()
-        self.weight = nn.Parameter(torch.ones(num_channels))
-        self.bias = nn.Parameter(torch.zeros(num_channels))
-        self.eps = eps
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        u = x.mean(1, keepdim=True)
-        s = (x - u).pow(2).mean(1, keepdim=True)
-        x = (x - u) / torch.sqrt(s + self.eps)
-        x = self.weight[:, None, None] * x + self.bias[:, None, None]
-        return x
-
-
-class FeatureRefinement(nn.Module):
-    def __init__(self, in_channels=64, decode_channels=64):
-        super().__init__()
-        self.local1 = ConvBN(decode_channels, decode_channels, kernel_size=3)
-        self.local2 = ConvBN(decode_channels, decode_channels, kernel_size=1)
-        self.proj = SeparableConvBN(decode_channels, decode_channels, kernel_size=3)
-        self.act = nn.ReLU6()
-
-    def forward(self, x):
-        x = self.local1(x) + self.local2(x)
-        x = self.proj(x)
-        x = self.act(x)
-
-        return x
 
 class Sam(nn.Module):
     mask_threshold: float = 0.0
