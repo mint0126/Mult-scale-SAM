@@ -1,4 +1,3 @@
-from .dataset_nwpu import CocoDataset
 from .loveda import LoveDA
 from torch.utils.data import DataLoader
 from .potsdam import Potsdam
