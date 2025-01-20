@@ -75,7 +75,6 @@ def trainer_synapse(args, model, snapshot_path, trainloader, valloader):
     model.train()
 
     if args.AdamW:
-        
         layerwise_params = {"backbone.*": dict(lr=args.backbone_lr, weight_decay=args.backbone_weight_decay)}
         net_params = utils.process_model_params(model, layerwise_params=layerwise_params)
         base_optimizer = torch.optim.AdamW(net_params, lr=args.base_lr, weight_decay=args.weight_decay)
@@ -88,7 +87,9 @@ def trainer_synapse(args, model, snapshot_path, trainloader, valloader):
         # optimizer = optim.AdamW(filter(lambda p: p.requires_grad, model.parameters()), betas=(0.9, 0.999), lr=b_lr, weight_decay=args.weight_decay)
         # lr_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=args.max_epochs, eta_min=1e-6)
     else:
-        optimizer = optim.SGD(filter(lambda p: p.requires_grad, model.parameters()), lr=args.base_lr, momentum=0.9, weight_decay=0.0001)  # Even pass the model.parameters(), the `requires_grad=False` layers will not update
+        # RS3Mamba
+        optimizer = optim.SGD(model.parameters(), lr=args.base_lr, momentum=0.9, weight_decay=0.0005)
+        scheduler = optim.lr_scheduler.MultiStepLR(optimizer, [25, 35, 45], gamma=0.1)
 
     writer = SummaryWriter(snapshot_path + '/log')
     iter_num = 0
