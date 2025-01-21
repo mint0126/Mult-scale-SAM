@@ -281,14 +281,14 @@ class Block(nn.Module):
         if window_size == 0:
             self.down_proj = nn.Linear(dim, dim//12)
             self.d_convs = nn.ModuleList([nn.Conv2d(dim//12, dim//12, kernel_size=3, stride=1, padding=1, groups=dim//12) for temp in pool_ratios])
-            self.p2t_attn = PoolingAttention(dim//8, num_heads=16, qkv_bias=qkv_bias, pool_ratios=pool_ratios)
+            self.p2t_attn = PoolingAttention(dim//8, num_heads=8, qkv_bias=qkv_bias, pool_ratios=pool_ratios)
             self.p2t_mlp = IRB(in_features=dim, hidden_features=int(dim * mlp_ratio), act_layer=nn.Hardswish, drop=0.3, ksize=3)
             self.up_proj = nn.Linear(dim//12, dim)
         else:
             self.down_proj = nn.Linear(dim, dim // 12)
-            self.attn_0 = Attention(dim//12, num_heads=16, qkv_bias=qkv_bias, use_rel_pos=True, rel_pos_zero_init=rel_pos_zero_init,
+            self.attn_0 = Attention(dim//12, num_heads=8, qkv_bias=qkv_bias, use_rel_pos=True, rel_pos_zero_init=rel_pos_zero_init,
                                 input_size=(7, 7))
-            self.attn_1 = Attention(dim//12, num_heads=16, qkv_bias=qkv_bias, use_rel_pos=True, rel_pos_zero_init=rel_pos_zero_init,
+            self.attn_1 = Attention(dim//12, num_heads=8, qkv_bias=qkv_bias, use_rel_pos=True, rel_pos_zero_init=rel_pos_zero_init,
                                 input_size=(28, 28))
             # self.p2t_mlp = IRB(in_features=dim // 12, hidden_features=int(dim // 12 * mlp_ratio), act_layer=nn.Hardswish, drop=0.3, ksize=3)
             self.up_proj = nn.Linear(dim // 12, dim)
