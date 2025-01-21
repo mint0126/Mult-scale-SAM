@@ -72,7 +72,7 @@ class UnetFormerLoss(nn.Module):
     def __init__(self, ignore_index=255):
         super().__init__()
         self.main_loss = JointLoss(SoftCrossEntropyLoss(smooth_factor=0.05, ignore_index=ignore_index),
-                                   DiceLoss(smooth=0.05, ignore_index=ignore_index), 1, 1)
+                                   DiceLoss(smooth=0.05, ignore_index=ignore_index), 1.0, 1.0)
         self.aux_loss = SoftCrossEntropyLoss(smooth_factor=0.05, ignore_index=ignore_index)
 
     def forward(self, logits, labels):
@@ -88,15 +88,12 @@ class UnetFormerLoss(nn.Module):
                 loss = main_loss / len(logit_main) + 0.4 * aux_loss / len(logit_main)
             elif isinstance(logit_aux,list):
                 aux_loss = 0
-                alpha = [0.4, 0.2, 0.1]
+                alpha = [0.2, 0.3, 0.5]
                 for i in range(len(logit_aux)):
                     aux_loss += alpha[i] * self.aux_loss(logit_aux[i], labels)
-                
                 loss = self.main_loss(logit_main, labels) + aux_loss
             else:
-                # labels_aux = F.interpolate(labels.unsqueeze(1).float(), size=(logit_aux.size()[2:]), mode='bilinear', align_corners=False)
                 loss = self.main_loss(logit_main, labels) + 0.4 * self.aux_loss(logit_aux, labels)
-                # loss = self.main_loss(logit_main, labels) + 0.4 * self.aux_loss(logit_aux, labels)
         else:
             loss = self.main_loss(logits, labels)
 
