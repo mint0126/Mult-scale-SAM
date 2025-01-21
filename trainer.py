@@ -13,7 +13,6 @@ from collections import defaultdict
 from tensorboardX import SummaryWriter
 import torch.nn.functional as F
 from tqdm import tqdm
-from loss import UnetFormerLoss
 from utils import display_images, to_rgb, denormalize
 import torchvision
 from icecream import ic
