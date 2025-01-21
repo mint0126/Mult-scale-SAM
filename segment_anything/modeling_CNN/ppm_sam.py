@@ -15,8 +15,6 @@ from .mask_decoder import MaskDecoder
 from .prompt_encoder import PromptEncoder
 from .common import LayerNorm2d
 from .transformer import MultiHeadedSelfAttention
-from .ppm_attention import PyramidPoolingBlock
-from .p2t import PoolingAttentionBlock
 
 
 class Sam(nn.Module):
