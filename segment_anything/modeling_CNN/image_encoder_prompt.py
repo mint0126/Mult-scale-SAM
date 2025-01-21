@@ -272,7 +272,6 @@ class Block(nn.Module):
         self.norm3 = norm_layer(dim//12)
         self.norm4 = norm_layer(dim)
         self.norm5 = norm_layer(dim//12)
-        # self.norm6 = norm_layer(dim//12)
         self.norm6 = norm_layer(dim)
 
         drop_path=0.3
@@ -281,7 +280,7 @@ class Block(nn.Module):
         if window_size == 0:
             self.down_proj = nn.Linear(dim, dim//12)
             self.d_convs = nn.ModuleList([nn.Conv2d(dim//12, dim//12, kernel_size=3, stride=1, padding=1, groups=dim//12) for temp in pool_ratios])
-            self.p2t_attn = PoolingAttention(dim//8, num_heads=8, qkv_bias=qkv_bias, pool_ratios=pool_ratios)
+            self.p2t_attn = PoolingAttention(dim//12, num_heads=8, qkv_bias=qkv_bias, pool_ratios=pool_ratios)
             self.p2t_mlp = IRB(in_features=dim, hidden_features=int(dim * mlp_ratio), act_layer=nn.Hardswish, drop=0.3, ksize=3)
             self.up_proj = nn.Linear(dim//12, dim)
         else:
