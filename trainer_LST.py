@@ -21,8 +21,8 @@ from catalyst.contrib.nn import Lookahead
 from catalyst import utils
 
 
-# CLASSES = ('ImSurf', 'Building', 'LowVeg', 'Tree', 'Car', 'Clutter')
-CLASSES = ('Building', 'Road', 'Tree', 'LowVeg', 'Moving_Car',  'Static_Car', 'Human', 'Clutter')
+CLASSES = ('ImSurf', 'Building', 'LowVeg', 'Tree', 'Car', 'Clutter') # Potsdam和Vaihingen
+# CLASSES = ('Building', 'Road', 'Tree', 'LowVeg', 'Moving_Car',  'Static_Car', 'Human', 'Clutter') # UAVid
 # CLASSES = ('background', 'building', 'road', 'water', 'barren', 'forest', 'agricultural')
 '''CLASSES = ('airplane', 'bare soil', 'buildings ', 'cars', 'chaparral', 'court', 
            'dock', 'field', 'grass', 'mobile home', 'pavement', 'sand', 'sea', 
