@@ -16,6 +16,7 @@ from loss import UnetFormerLoss
 from utils import display_images, to_rgb, denormalize
 import torchvision
 from icecream import ic
+from losses import *
 import imageio
 from catalyst.contrib.nn import Lookahead
 from catalyst import utils
