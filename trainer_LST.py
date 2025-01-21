@@ -17,7 +17,6 @@ from utils import display_images, to_rgb, denormalize
 import torchvision
 from icecream import ic
 import imageio
-from losses import *
 from catalyst.contrib.nn import Lookahead
 from catalyst import utils
 
@@ -95,7 +94,7 @@ def trainer_synapse(args, model, snapshot_path, trainloader, valloader, multimas
     max_iterations = args.max_epochs * len(trainloader)  # max_epoch = max_iterations // len(trainloader) + 1
     logging.info("{} iterations per epoch. {} max iterations ".format(len(trainloader), max_iterations))
     best_miou = 0.0
-    calc_loss = UnetFormerLoss(ignore_index=255)
+    calc_loss = UnetFormerLoss(ignore_index=args.num_classes) # calc_loss = UnetFormerLoss(ignore_index=255) # uavid数据集
     metrics_train = Evaluator(num_class=args.num_classes)
     metrics_val = Evaluator(num_class=args.num_classes)
     iterator = tqdm(range(max_epoch), ncols=70)
